@@ -1,6 +1,6 @@
 # README.md
 
-# # n8n-Docker Swarm Deployment
+# # n8n-setup-docker Swarm Deployment
 
 A production-ready, Swarm-optimized setup for [n8n](https://n8n.io/), with:
 
@@ -69,117 +69,9 @@ echo "pa$$w0rd"       > secrets/n8n_db_password.txt
 echo "n8n"            > secrets/n8n_db_name.txt
 ```
 
-## 🛠️ Build & Push Your Custom n8n Image
-
-```bash
-docker build -t my-n8n:latest .
-docker stack deploy -c docker-compose.yaml n8n_stack
-```
-
-*(Optional, if you use a private registry) docker push my-n8n:latest*
-
-## 🚀 Deploy to Docker Swarm
-
-#### # 1 - **Initialize Swarm** (if not already):
-
-```bash
-docker swarm init
-```
-
-### # 2 - Deploy docker-compose.yaml to Docker Swarm
-
-```bash
-docker stack deploy -c docker-compose.yaml n8n_stack
-
-Replace n8n_stack with your desired stack name.
-```
-
-### # 2 - **Deploy** the stack:
-
-```bash
-docker stack deploy -c docker-compose.yaml n8n_stack -d
-```
-
-*-d  is optional - if you want n8n to run in the same terminal as deployment execution.*
-
-#### # 3 - **Watch the service** come up and its logs:
-
-```bash
-docker service ls
-docker service logs -f n8n_stack_n8n
-```
-
-#### # 4 - **Access the n8n** at [http://localhost:5678](http://localhost:5678) (or replace `localhost` with your manager node’s IP/domain).
-
 --- 
 
-## 📝 How It Works
-
-1. **Swarm Secrets**: All credentials are injected as files in `/run/secrets/…`.
-
-2. **`docker_run.sh`**:
-   
-   - Exports the secrets into the environment (`N8N_…` & `DB_POSTGRESDB_…`).
-   
-   - Performs an optional database readiness check.
-   
-   - On success, `exec n8n` hands control to the official n8n process.
-
-3. **Port 5678** is published in Swarm (`"5678:5678"`).
-
-4. **Redeployment**: To update env or code, rebuild the image, rotate secrets (`secret_update.sh`), then run `docker stack deploy` … again.
-
----
-
-## ⚙️ Tips & Troubleshooting
-
-- **DB Connectivity Failures**  
-  If the container logs show it can’t reach the DB, exec into the container and test:
-  
-  ```bash
-  docker exec -it $(docker ps -qf "name=n8n_stack_n8n") /bin/sh
-  # inside:
-  psql -h "$(cat /run/secrets/n8n_db_host)" \
-       -p "$(cat /run/secrets/n8n_db_port)" \
-       -U "$(cat /run/secrets/n8n_db_user)" \
-       -d "$(cat /run/secrets/n8n_db_name)" -c '\q'--- 
-  ```
-
-- **Updating Secrets**  
-  Secrets are immutable. Always remove and recreate them via `secret_update.sh` before stack redeploy.
-
-- **Scaling**  
-  To run multiple replicas, adjust `deploy.replicas` in `docker-compose.yaml`. Remember each replica will share the same secrets and volume.
-
-- **Swarm Constraints**  
-  We’ve locked `n8n` to manager nodes by default—remove `placement` if you want worker nodes to run it as well.
-
----
-
-## 🛡️ Security Considerations
-
-- Keep `./secrets/` out of Git (`.gitignore`).
-
-- Use a secure vault or CI/CD secrets store in production.
-
-- Rotate your `n8n_encryption_key` and database credentials regularly.
-
----
-
-## Secret Rotation Script - update_n8n.secrets.sh
-
-This repository includes `update_n8n_secrets.sh`, a helper script to rotate all Docker Swarm secrets for your `n8n_stack`.
-
-### What it does
-
-1. **Scales down** the `n8n` service to 0 replicas so you can safely remove in-use secrets.  
-2. **Removes** the old secrets (ignoring errors if they don’t exist).  
-3. **Creates** new secrets from the plaintext files in `./secrets/*.txt`.  
-4. **Scales up** the `n8n` service back to 1 replica, forcing it to pick up the new credentials.
-
----
-
-## Setup:
+Setup:
 
 ## ⚙️ 1. Initialize Docker Swarm (If Not Already)
 
@@ -275,14 +167,15 @@ docker service logs -f n8n_stack_n8n
 
 ## 🌐 6. Access n8n in Browser
 
-Open:
-http://localhost:5678 (or your server’s IP)
+Open: [http://localhost:5678](http://localhost:5678) (or your server’s IP)
 
 Use credentials defined in:
 
-    secrets/n8n_basic_auth_user.txt
-    
-    secrets/n8n_basic_auth_password.txt
+```
+secrets/n8n_basic_auth_user.txt
+
+secrets/n8n_basic_auth_password.txt
+```
 
 Boom. You’re in. 🎛️
 
@@ -310,7 +203,60 @@ If you ever want to nuke the deployment:
 
 ---
 
-# ##BONUS##
+## 📝 How It Works
+
+1. **Swarm Secrets**: All credentials are injected as files in `/run/secrets/…`. (inside repository)
+
+2. **`docker_run.sh`**:
+   
+   - Exports the secrets into the environment (`N8N_…` & `DB_POSTGRESDB_…`).
+   
+   - Performs an optional database readiness check.
+   
+   - On success, `exec n8n` hands control to the official n8n process.
+
+3. **Port 5678** is published in Swarm (`"5678:5678"`).
+
+4. **Redeployment**: To update env or code, rebuild the image, rotate secrets (`secret_update.sh`), then run `docker stack deploy` … again.
+
+---
+
+## ⚙️ Tips & Troubleshooting
+
+- **DB Connectivity Failures**  
+  If the container logs show it can’t reach the DB, exec into the container and test:
+  
+  ```bash
+  docker exec -it $(docker ps -qf "name=n8n_stack_n8n") /bin/sh
+  # inside:
+  psql -h "$(cat /run/secrets/n8n_db_host)" \
+       -p "$(cat /run/secrets/n8n_db_port)" \
+       -U "$(cat /run/secrets/n8n_db_user)" \
+       -d "$(cat /run/secrets/n8n_db_name)" -c '\q'--- 
+  ```
+
+- **Updating Secrets**  
+  Secrets are immutable. Always remove and recreate them via `secret_update.sh` before stack redeploy.
+
+- **Scaling**  
+  To run multiple replicas, adjust `deploy.replicas` in `docker-compose.yaml`. Remember each replica will share the same secrets and volume.
+
+- **Swarm Constraints**  
+  We’ve locked `n8n` to manager nodes by default—remove `placement` if you want worker nodes to run it as well.
+
+---
+
+## 🛡️ Security Considerations
+
+- Keep `./secrets/` out of Git (`.gitignore`).
+
+- Use a secure vault or CI/CD secrets store in production.
+
+- Rotate your `n8n_encryption_key` and database credentials regularly.
+
+---
+
+## ##BONUS##
 
 #### 🚀 Docker Swarm & Container Management **Cheat Sheet:**
 
@@ -318,7 +264,6 @@ If you ever want to nuke the deployment:
 
 ```bash
 docker swarm init
-
 ```
 
 *Optional: specify advertise address (useful for multi-node setups):*
@@ -326,8 +271,6 @@ docker swarm init
 ```bash
 docker swarm init --advertise-addr
 ```
-
-
 
 ### # 2 - Deploy docker-compose.yaml to Docker Swarm
 
