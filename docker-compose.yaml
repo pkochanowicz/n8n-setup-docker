@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: MIT
+version: '3.8'
+
+services:
+  n8n:
+    image: my-n8n:latest
+    ports:
+      - "5678:5678"
+    entrypoint: ["/docker_run.sh"]
+    volumes:
+      - ./docker_run.sh:/docker_run.sh:ro
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    environment:
+      - DB_TYPE=postgresdb
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_PORT=5678
+      - N8N_RUNNERS_ENABLED=true
+      - N8N_LOG_LEVEL=info
+      - N8N_DIAGNOSTICS_ENABLED=false
+      - GENERIC_TIMEZONE=Europe/Warsaw
+      - NODE_ENV=production
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+    secrets:
+      - n8n_basic_auth_user
+      - n8n_basic_auth_password
+      - n8n_encryption_key
+      - n8n_db_host
+      - n8n_db_schema
+      - n8n_db_port
+      - n8n_db_user
+      - n8n_db_password
+      - n8n_db_name
+
+secrets:
+  n8n_basic_auth_user:
+    file: ./secrets/n8n_basic_auth_user.txt
+  n8n_basic_auth_password:
+    file: ./secrets/n8n_basic_auth_password.txt
+  n8n_encryption_key:
+    file: ./secrets/n8n_encryption_key.txt
+  n8n_db_schema:
+    file: ./secrets/n8n_db_schema.txt
+  n8n_db_host:
+    file: ./secrets/n8n_db_host.txt
+  n8n_db_port:
+    file: ./secrets/n8n_db_port.txt
+  n8n_db_user:
+    file: ./secrets/n8n_db_user.txt
+  n8n_db_password:
+    file: ./secrets/n8n_db_password.txt
+  n8n_db_name:
+    file: ./secrets/n8n_db_name.txt
