@@ -66,7 +66,8 @@ echo "public"         > secrets/n8n_db_schema.txt
 echo "5432"           > secrets/n8n_db_port.txt
 echo "n8n_user"       > secrets/n8n_db_user.txt
 echo "pa$$w0rd"       > secrets/n8n_db_password.txt
-echo "n8n"            > secrets/n8n_db_name.txt
+echo "n8n"            > secrets/n8n_db_schema.txt
+echo "postgres"       > secrets/n8n_db_name.txt
 ```
 
 --- 
