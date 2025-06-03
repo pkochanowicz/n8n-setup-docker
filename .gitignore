@@ -1,1 +1,5 @@
 secrets/*
+
+.github/
+
+fly.toml

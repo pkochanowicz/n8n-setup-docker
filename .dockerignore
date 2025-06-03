@@ -1,0 +1,6 @@
+# flyctl launch added from .gitignore
+**/secrets/*
+
+**/.github/workflows/*
+
+**/fly.toml

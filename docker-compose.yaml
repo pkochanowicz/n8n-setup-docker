@@ -1,55 +1,65 @@
-# SPDX-License-Identifier: MIT
 version: '3.8'
 
 services:
   n8n:
     image: my-n8n:latest
     ports:
-      - "5678:5678"
-    entrypoint: ["/docker_run.sh"]
+      - "${N8N_PORT:-5678}:${N8N_PORT:-5678}"
+    entrypoint: ["/container_run.sh"]
     volumes:
-      - ./docker_run.sh:/docker_run.sh:ro
-    deploy:
-      replicas: 1
-      placement:
-        constraints: [node.role == manager]
+      - ./container_run.sh:/container_run.sh:ro
+      - n8n_data:/root/.n8n
     environment:
       - DB_TYPE=postgresdb
+
+      - N8N_BASIC_AUTH_USER_FILE=/run/secrets/N8N_BASIC_AUTH_USER
+      - N8N_BASIC_AUTH_PASSWORD_FILE=/run/secrets/N8N_BASIC_AUTH_PASSWORD
+      - N8N_ENCRYPTION_KEY_FILE=/run/secrets/N8N_ENCRYPTION_KEY
+      - DB_POSTGRESDB_HOST_FILE=/run/secrets/DB_POSTGRESDB_HOST
+      - DB_POSTGRESDB_PORT_FILE=/run/secrets/DB_POSTGRESDB_PORT
+      - DB_POSTGRESDB_DATABASE_FILE=/run/secrets/DB_POSTGRESDB_DATABASE
+      - DB_POSTGRESDB_SCHEMA_FILE=/run/secrets/DB_POSTGRESDB_SCHEMA
+      - DB_POSTGRESDB_USER_FILE=/run/secrets/DB_POSTGRESDB_USER
+      - DB_POSTGRESDB_PASSWORD_FILE=/run/secrets/DB_POSTGRESDB_PASSWORD
+
       - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_PORT=5678
       - N8N_RUNNERS_ENABLED=true
       - N8N_LOG_LEVEL=info
       - N8N_DIAGNOSTICS_ENABLED=false
-      - GENERIC_TIMEZONE=Europe/Warsaw
       - NODE_ENV=production
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
     secrets:
-      - n8n_basic_auth_user
-      - n8n_basic_auth_password
-      - n8n_encryption_key
-      - n8n_db_host
-      - n8n_db_schema
-      - n8n_db_port
-      - n8n_db_user
-      - n8n_db_password
-      - n8n_db_name
+      - N8N_BASIC_AUTH_USER
+      - N8N_BASIC_AUTH_PASSWORD
+      - N8N_ENCRYPTION_KEY
+      - DB_POSTGRESDB_HOST
+      - DB_POSTGRESDB_PORT
+      - DB_POSTGRESDB_DATABASE
+      - DB_POSTGRESDB_SCHEMA
+      - DB_POSTGRESDB_USER
+      - DB_POSTGRESDB_PASSWORD
 
 secrets:
-  n8n_basic_auth_user:
-    file: ./secrets/n8n_basic_auth_user.txt
-  n8n_basic_auth_password:
-    file: ./secrets/n8n_basic_auth_password.txt
-  n8n_encryption_key:
-    file: ./secrets/n8n_encryption_key.txt
-  n8n_db_schema:
-    file: ./secrets/n8n_db_schema.txt
-  n8n_db_host:
-    file: ./secrets/n8n_db_host.txt
-  n8n_db_port:
-    file: ./secrets/n8n_db_port.txt
-  n8n_db_user:
-    file: ./secrets/n8n_db_user.txt
-  n8n_db_password:
-    file: ./secrets/n8n_db_password.txt
-  n8n_db_name:
-    file: ./secrets/n8n_db_name.txt
+  N8N_BASIC_AUTH_USER:
+    file: ./secrets/N8N_BASIC_AUTH_USER.txt
+  N8N_BASIC_AUTH_PASSWORD:
+    file: ./secrets/N8N_BASIC_AUTH_PASSWORD.txt
+  N8N_ENCRYPTION_KEY:
+    file: ./secrets/N8N_ENCRYPTION_KEY.txt
+  DB_POSTGRESDB_HOST:
+    file: ./secrets/DB_POSTGRESDB_HOST.txt
+  DB_POSTGRESDB_PORT:
+    file: ./secrets/DB_POSTGRESDB_PORT.txt
+  DB_POSTGRESDB_DATABASE:
+    file: ./secrets/DB_POSTGRESDB_DATABASE.txt
+  DB_POSTGRESDB_SCHEMA:
+    file: ./secrets/DB_POSTGRESDB_SCHEMA.txt
+  DB_POSTGRESDB_USER:
+    file: ./secrets/DB_POSTGRESDB_USER.txt
+  DB_POSTGRESDB_PASSWORD:
+    file: ./secrets/DB_POSTGRESDB_PASSWORD.txt
+
+volumes:
+  n8n_data:
+    driver: local

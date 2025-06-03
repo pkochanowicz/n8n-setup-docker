@@ -1,388 +1,243 @@
-# README.md
+<!-- README.md -->
+```
+#   ▄▄        ▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄        ▄             ▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄    ▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄             ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄         ▄ ▄▄▄▄▄▄▄▄▄▄▄ 
+#  ▐░░▌      ▐░▐░░░░░░░░░░░▐░░▌      ▐░▌           ▐░░░░░░░░░░▌▐░░░░░░░░░░░▐░░░░░░░░░░░▐░▌  ▐░▐░░░░░░░░░░░▐░░░░░░░░░░░▌           ▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▐░▌       ▐░▐░░░░░░░░░░░▌
+#  ▐░▌░▌     ▐░▐░█▀▀▀▀▀▀▀█░▐░▌░▌     ▐░▌           ▐░█▀▀▀▀▀▀▀█░▐░█▀▀▀▀▀▀▀█░▐░█▀▀▀▀▀▀▀▀▀▐░▌ ▐░▌▐░█▀▀▀▀▀▀▀▀▀▐░█▀▀▀▀▀▀▀█░▌           ▐░█▀▀▀▀▀▀▀▀▀▐░█▀▀▀▀▀▀▀▀▀ ▀▀▀▀█░█▀▀▀▀▐░▌       ▐░▐░█▀▀▀▀▀▀▀█░▌
+#  ▐░▌▐░▌    ▐░▐░▌       ▐░▐░▌▐░▌    ▐░▌           ▐░▌       ▐░▐░▌       ▐░▐░▌         ▐░▌▐░▌ ▐░▌         ▐░▌       ▐░▌           ▐░▌         ▐░▌              ▐░▌    ▐░▌       ▐░▐░▌       ▐░▌
+#  ▐░▌ ▐░▌   ▐░▐░█▄▄▄▄▄▄▄█░▐░▌ ▐░▌   ▐░▌▄▄▄▄▄▄▄▄▄▄▄▐░▌       ▐░▐░▌       ▐░▐░▌         ▐░▌░▌  ▐░█▄▄▄▄▄▄▄▄▄▐░█▄▄▄▄▄▄▄█░▌▄▄▄▄▄▄▄▄▄▄▄▐░█▄▄▄▄▄▄▄▄▄▐░█▄▄▄▄▄▄▄▄▄     ▐░▌    ▐░▌       ▐░▐░█▄▄▄▄▄▄▄█░▌
+#  ▐░▌  ▐░▌  ▐░▌▐░░░░░░░░░▌▐░▌  ▐░▌  ▐░▐░░░░░░░░░░░▐░▌       ▐░▐░▌       ▐░▐░▌         ▐░░▌   ▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▌    ▐░▌    ▐░▌       ▐░▐░░░░░░░░░░░▌
+#  ▐░▌   ▐░▌ ▐░▐░█▀▀▀▀▀▀▀█░▐░▌   ▐░▌ ▐░▌▀▀▀▀▀▀▀▀▀▀▀▐░▌       ▐░▐░▌       ▐░▐░▌         ▐░▌░▌  ▐░█▀▀▀▀▀▀▀▀▀▐░█▀▀▀▀█░█▀▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀█░▐░█▀▀▀▀▀▀▀▀▀     ▐░▌    ▐░▌       ▐░▐░█▀▀▀▀▀▀▀▀▀ 
+#  ▐░▌    ▐░▌▐░▐░▌       ▐░▐░▌    ▐░▌▐░▌           ▐░▌       ▐░▐░▌       ▐░▐░▌         ▐░▌▐░▌ ▐░▌         ▐░▌     ▐░▌                       ▐░▐░▌              ▐░▌    ▐░▌       ▐░▐░▌          
+#  ▐░▌     ▐░▐░▐░█▄▄▄▄▄▄▄█░▐░▌     ▐░▐░▌           ▐░█▄▄▄▄▄▄▄█░▐░█▄▄▄▄▄▄▄█░▐░█▄▄▄▄▄▄▄▄▄▐░▌ ▐░▌▐░█▄▄▄▄▄▄▄▄▄▐░▌      ▐░▌             ▄▄▄▄▄▄▄▄▄█░▐░█▄▄▄▄▄▄▄▄▄     ▐░▌    ▐░█▄▄▄▄▄▄▄█░▐░▌          
+#  ▐░▌      ▐░░▐░░░░░░░░░░░▐░▌      ▐░░▌           ▐░░░░░░░░░░▌▐░░░░░░░░░░░▐░░░░░░░░░░░▐░▌  ▐░▐░░░░░░░░░░░▐░▌       ▐░▌           ▐░░░░░░░░░░░▐░░░░░░░░░░░▌    ▐░▌    ▐░░░░░░░░░░░▐░▌          
+#   ▀        ▀▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀        ▀▀             ▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀    ▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀         ▀             ▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀      ▀      ▀▀▀▀▀▀▀▀▀▀▀ ▀           
+#                                                                                                                                                                                              
+🌀 Seamless DevOps. Powered by Swarm, Secured by Secrets.
+```
 
-# # n8n-setup-docker Swarm Deployment
-
-A production-ready, Swarm-optimized setup for [n8n](https://n8n.io/), with:
-
-- **Custom Docker image** (`my-n8n:latest`) that includes `psql` for health-checks  
-- **Docker Swarm** stack deployment  
-- **Docker secrets** for all sensitive credentials  
-- A **startup script** (`docker_run.sh`) that loads secrets, sets environment vars, checks DB connectivity, and then launches n8n  
+<p align="center">
+  <img alt="n8n" src="https://img.shields.io/badge/n8n-self--hosted-brightgreen?style=for-the-badge&logo=n8n&logoColor=white">
+  <img alt="docker" src="https://img.shields.io/badge/docker-swarm-blue?style=for-the-badge&logo=docker">
+  <img alt="secure" src="https://img.shields.io/badge/secrets-managed-critical?style=for-the-badge&logo=gnuprivacyguard&logoColor=white">
+  <img alt="built-by" src="https://img.shields.io/badge/built%20by-pkochanowicz-F54D27?style=for-the-badge&logo=git&logoColor=white">
+</p>
 
 ---
 
-## 📁 Repository Layout
+# 🔧 n8n-setup-docker: Secure, Custom, Ready for Action
 
-```text
-.
-├── Dockerfile
-├── docker-compose.yaml
-├── docker_run.sh
-├── secret_update.sh      # (optional) recreates Docker secrets from ./secrets/*.txt
-└── secrets/
-    ├── n8n_basic_auth_user.txt
-    ├── n8n_basic_auth_password.txt
-    ├── n8n_encryption_key.txt
-    ├── n8n_db_host.txt
-    ├── n8n_db_schema.txt
-    ├── n8n_db_port.txt
-    ├── n8n_db_user.txt
-    └── n8n_db_name.txt
-```
+This repo delivers a production-friendly `n8n` stack using:
 
-- **`Dockerfile`**  
-  Builds `my-n8n:latest` image on `node:18-slim`, installs `postgresql-client`, and copies your `docker_run.sh` entrypoint.
+- 🐳 **Docker Swarm** for container orchestration  
+- 🔐 **Docker Secrets** for all sensitive env vars  
+- ⚙️ Custom scripts to prep, deploy, and launch cleanly  
+- 🧠 Readable, modifiable, highly hackable code  
 
-- **`docker-compose.yaml`**  
-  Defines the `n8n` service for Docker Swarm: mounts secrets, publishes port 5678, constrains to manager nodes, and calls your script.
-
-- **`docker_run.sh`**
-  
-  - Reads all required secrets from `/run/secrets/...` (inside Docker container)
-  
-  - Exports the corresponding `N8N_…` & `DB_POSTGRESDB_…` env vars
-  
-  - (Optional) Wait-for-it logic could be added here to retry the DB check
-  
-  - Finally `exec n8n` to hand over to the official n8n entrypoint
-
-- **`secret_update.sh`** (optional)  
-  A helper to recreate or rotate your Docker secrets from the files in `./secrets/`.
+If you want a secure, local-AND-remote deployable `n8n` instance with PostgreSQL and zero manual docker CLI poking…  
+**This is it.**
 
 ---
 
-## 🔐 Managing Secrets
+## 🧠 Project Tree
 
-Place your plaintext credentials into the `.n8n/secrets/` folder:
-
-```textile
-# example
-echo "admin"    > secrets/n8n_basic_auth_user.txt
-echo "hunter2"  > secrets/n8n_basic_auth_password.txt
-echo "myKeyBase" > secrets/n8n_encryption_key.txt
-
-echo "db.example.com" > secrets/n8n_db_host.txt
-echo "public"         > secrets/n8n_db_schema.txt
-echo "5432"           > secrets/n8n_db_port.txt
-echo "n8n_user"       > secrets/n8n_db_user.txt
-echo "pa$$w0rd"       > secrets/n8n_db_password.txt
-echo "n8n"            > secrets/n8n_db_name.txt
+```txt
+./
+├── docker-compose.yaml              # Swarm service definition
+├── Dockerfile                       # Custom n8n image with psql & logic
+├── container_run.sh                 # Entry script inside container
+├── docker_swarm_deploy.sh           # Dev’s best friend — deploys everything
+├── docker_clear_env_vars.sh         # Script to remove or unset sensitive environment variables from the shell/session.
+├── docker_destroy_container.sh      # Script to fully stop and remove Docker stack, containers, volumes, and leave Swarm.
+├── README.md                        # Project overview, usage instructions, diagrams, and badges. Your main documentation.
+├── Docker_cheatsheet.md             # Handy reference for common Docker commands tailored to your workflow.
+├── .gitignore                       # Git config file to exclude specified files/folders (like secrets, volumes, etc.) from version control.
+├── .dockerignore                    # Docker config file to exclude files/folders from being copied into Docker build context.
+├── secrets/                         # 🔥 Sensitive data here (not git-tracked!)
+│   ├── N8N_BASIC_AUTH_USER.txt
+│   ├── N8N_BASIC_AUTH_PASSWORD.txt
+│   ├── N8N_ENCRYPTION_KEY.txt
+│   ├── DB_POSTGRESDB_HOST.txt
+│   ├── DB_POSTGRESDB_PORT.txt
+│   ├── DB_POSTGRESDB_DATABASE.txt
+│   ├── DB_POSTGRESDB_SCHEMA.txt
+│   ├── DB_POSTGRESDB_USER.txt
+│   ├── DB_POSTGRESDB_PASSWORD.txt
+│   └── N8N_PORT.txt                  # optional
 ```
 
---- 
+---
 
-Setup:
-
-## ⚙️ 1. Initialize Docker Swarm (If Not Already)
+# 🚀 Quickstart
+### 1️⃣ Initialize Docker Swarm (if needed)
 
 ```bash
 docker swarm init
 ```
 
-If you already ran `swarm init` on this node before, you’re good.
+---
+
+### 2️⃣ Add Your Secrets
+
+Drop plain-text secret files into the ./secrets/ in the project dir. Example:
+
+```bash
+
+echo "admin"    > secrets/N8N_BASIC_AUTH_USER.txt
+echo "hunter2"  > secrets/N8N_BASIC_AUTH_PASSWORD.txt
+echo "myKeyBase" > secrets/N8N_ENCRYPTION_KEY.txt
+
+echo "db.example.com" > secrets/DB_POSTGRESDB_HOST.txt
+echo "public"         > secrets/DB_POSTGRESDB_SCHEMA.txt
+echo "5432"           > secrets/DB_POSTGRESDB_PORT.txt
+echo "n8n_user"       > secrets/DB_POSTGRESDB_USER.txt
+echo "pa$$w0rd"       > secrets/DB_POSTGRESDB_PASSWORD.txt
+echo "n8n"            > secrets/DB_POSTGRESDB_DATABASE.txt
+```
+And the same for your DB creds.
 
 ---
 
-## 🔐 2. Create Docker Secrets
-
-Ensure all your secrets exist in `./secrets/` as `.txt` files.
-
-Then:
+### 3️⃣ Deploy It Like a Boss
 
 ```bash
-chmod +x update_n8n_secrets.sh
-./update_n8n_secrets.sh
-```
+# only on the first run:
+docker swarm init
 
+# and then, to deploy:
+./docker_swarm_deploy.sh
+```
 This will:
 
-✅ Scale down the service (if any)  
-✅ Delete all old secrets (with `n8n_stack_n8n_*` names)  
-✅ Create fresh secrets from your `secrets/*.txt`  
-✅ Scale up service again
+    🏗️ Build your my-n8n:latest image
 
-> No service exists yet? That’s fine — this script will just rotate secrets. When we deploy the stack next, it’ll work perfectly.
+    🔐 Create (or update) all Docker secrets
 
----
+    📦 Deploy a Swarm stack (n8n_stack) with those secrets
 
-## 🛠️ 3. Build the Custom n8n Image
-
-```bash
-docker build -t my-n8n:latest .
-```
-
-This:
-
-- Installs `psql`, `n8n`, and your `docker_run.sh` launcher
-
-- Makes your secrets-friendly startup script executable
+    🧠 Auto-detect your timezone and inject it too!
 
 ---
 
-## 📦 4. Deploy the Stack
-
-```bash
-docker stack deploy -c docker-compose.yaml n8n_stack
-```
-
-🎉 This will:
-
-- Deploy the `my-n8n:latest` image as a Swarm service
-
-- Use `docker_run.sh` to inject secrets into the environment
-
-- Mount your secrets securely via `docker secrets`
-
-- Run `n8n` with the proper DB and auth config
-
----
-
-## 🧪 5. Confirm It’s Running
-
-```bash
-docker service ls
-```
-
-Check that the `n8n_stack_n8n` service has `1/1` replicas.
-
-Then:
-
-```bash
-docker ps
-```
-
-Find the container ID and logs:
-
-```bash
-docker logs <container-id>
-```
-
-Or simply:
+### 4️⃣ Check Docker logs:
 
 ```bash
 docker service logs -f n8n_stack_n8n
 ```
+And that's it - n8n is set up and ready! In case of online deployment you'll be able to access your automations from anywhere!
+(login using the values from your secret files)
 
 ---
 
-## 🌐 6. Access n8n in Browser
+## 🔍 What's Actually Happening?
 
-Open: [http://localhost:5678](http://localhost:5678) (or your server’s IP)
+Your container launches via:
+`container_run.sh`:
 
-Use credentials defined in:
+    🧪 Loads secrets from /run/secrets/…
 
-```
-secrets/n8n_basic_auth_user.txt
+    🔁 Converts them into environment variables
 
-secrets/n8n_basic_auth_password.txt
-```
+    ✅ Tests PostgreSQL DB connection via psql
 
-Boom. You’re in. 🎛️
+    🎬 Runs n8n ONLY if everything is healthy
 
----
-
-## 🔁 7. Rotate Secrets Later
-
-Want to reset encryption key or user password later?
-
-Just run:
-
-```bash
-./update_n8n_secrets.sh
-```
+💡 Fail fast, fail clean — or don’t fail at all.
 
 ---
 
-## 🧼 Optional: Clean Up Everything
+## ♻️ Rotating Secrets
 
-If you ever want to nuke the deployment:
+Secrets are immutable in Docker Swarm.
+To update:
 
 ```bash
-./nuke_deployment.sh
+# Edit files in ./secrets/*.txt
+
+# Then:
+./docker_swarm_deploy.sh
+```
+This deletes+recreates them automatically.
+
+---
+
+### 💾 Helpful scripts
+(mostly helpful during development, not recommended for production):
+
+#### 💥 Getting rid of Docker Containers
+
+Wanna burn it down?
+
+```bash
+./docker_destroy_container.sh
+```
+(Watch out - the script stops and removes all the Docker containers!)
+
+---
+
+#### 🧼 Cleaning Up env variables
+
+In case mess in env variables is giving you a headache:
+
+```bash
+./docker_clear_env_variables.sh
 ```
 
 ---
 
-## 📝 How It Works
-
-1. **Swarm Secrets**: All credentials are injected as files in `/run/secrets/…`. (inside repository)
-
-2. **`docker_run.sh`**:
-   
-   - Exports the secrets into the environment (`N8N_…` & `DB_POSTGRESDB_…`).
-   
-   - Performs an optional database readiness check.
-   
-   - On success, `exec n8n` hands control to the official n8n process.
-
-3. **Port 5678** is published in Swarm (`"5678:5678"`).
-
-4. **Redeployment**: To update env or code, rebuild the image, rotate secrets (`secret_update.sh`), then run `docker stack deploy` … again.
-
----
-
-## ⚙️ Tips & Troubleshooting
-
-- **DB Connectivity Failures**  
-  If the container logs show it can’t reach the DB, exec into the container and test:
-  
-  ```bash
-  docker exec -it $(docker ps -qf "name=n8n_stack_n8n") /bin/sh
-  # inside:
-  psql -h "$(cat /run/secrets/n8n_db_host)" \
-       -p "$(cat /run/secrets/n8n_db_port)" \
-       -U "$(cat /run/secrets/n8n_db_user)" \
-       -d "$(cat /run/secrets/n8n_db_name)" -c '\q'--- 
-  ```
-
-- **Updating Secrets**  
-  Secrets are immutable. Always remove and recreate them via `secret_update.sh` before stack redeploy.
-
-- **Scaling**  
-  To run multiple replicas, adjust `deploy.replicas` in `docker-compose.yaml`. Remember each replica will share the same secrets and volume.
-
-- **Swarm Constraints**  
-  We’ve locked `n8n` to manager nodes by default—remove `placement` if you want worker nodes to run it as well.
-
----
-
-## 🛡️ Security Considerations
-
-- Keep `./secrets/` out of Git (`.gitignore`).
-
-- Use a secure vault or CI/CD secrets store in production.
-
-- Rotate your `n8n_encryption_key` and database credentials regularly.
-
----
-
-## ##BONUS##
-
-#### 🚀 Docker Swarm & Container Management **Cheat Sheet:**
-
-### # 1 - Initialize Docker Swarm
+#### 👽 Need to reset n8n credentials within Docker container?
 
 ```bash
-docker swarm init
-```
-
-*Optional: specify advertise address (useful for multi-node setups):*
-
-```bash
-docker swarm init --advertise-addr
-```
-
-### # 2 - Deploy docker-compose.yaml to Docker Swarm
-
-```bash
-docker stack deploy -c docker-compose.yaml n8n_stack
-```
-
-Replace n8n_stack with your desired stack name.
-
-### #3 - Build image from Dockerfile:
-
-```bash
-docker build -t my-n8n:latest .
-```
-
-### # 4 - Stop a Single Docker Container
-
-```bash
-docker stop <container_name_or_id>
-```
-
-### # 5 - Stop All Running Docker Containers
-
-```bash
-docker stop $(docker ps -q)
-```
-
-*Optionally remove all stopped containers:*
-
-```bash
-docker rm $(docker ps -a -q)
-```
-
-### # 6 - Leave and Stop Docker Swarm
-
-```bash
-docker swarm leave --force
-```
-
-### # 7 - View Logs for a Specific Container
-
-```bash
-docker logs <container_name_or_id>
-```
-
-To follow logs in real-time:
-
-```bash
-docker logs -f
-```
-
-### # 8 - View Logs from All Containers in a Stack (Swarm):
-
-```bash
-docker service logs <stack_name>_<service_name>
-```
-
-*Example:*
-
-```bash
-docker service logs n8n_stack_n8n
-```
-
-To follow logs in real-time:
-
-```bash
-docker service logs -f n8n_stack_n8n
-```
-
-To list services in the stack (if you're unsure of the service name):
-
-```bash
-docker service ls
-```
-
-### # 9 - Find Container ID or Name
-
-```bash
+# This will list running containers, localise id or name of running container with n8n:
 docker ps
+
+# Execute n8n credentials reset command inside container:
+docker exec -it <container_name_or_id> n8n user-management:reset
 ```
 
-### # 10 - Inspect Swarm Nodes, Services, or Networks
+---
 
-```bash
-docker node ls
-docker service ls
-docker network ls
-```
+### 📘 Docker Cheatsheet
+📎 Check out the [Docker_cheatsheet.md](./Docker_cheatsheet.md) for more handy commands!
 
-### # 11 - Inspect a Container or Service in Detail
+#### (I see you, automation fiend 😎)
 
-```bash
-docker inspect <container_name_or_id>
-docker service inspect <service_name>
-```
+---
 
-### # 12 - Make sure your secrets are in place:
+## 💪 Powered By
 
-```bash
-./secret_update.sh
-```
+| 🧠 Platform| 🌐 Link |
+|------------|---------|
+| 🔧 **[n8n](https://n8n.io/)** – powerful workflow automation | 🧩 [Docs](https://docs.n8n.io/) |
+| 🐳 **[Docker](https://www.docker.com/)** – containerize all the things | 📦 [Hub](https://hub.docker.com/) |
+| 🐘 **[PostgreSQL](https://www.postgresql.org/)** – battle-tested relational database | 📚 [Docs](https://www.postgresql.org/docs/) |
+| 🤖 **[ChatGPT](https://chat.openai.com/)** – natural language assistant magic ✨ | 🔍 [OpenAI](https://openai.com/chatgpt) |
 
-### # 13 - Deploy
+---
 
-```bash
-docker stack deploy -c docker-compose.yaml n8n_stack
-```
+## 🚀 Free Tier PostgreSQL Hosting for n8n Self-Hosting (examples):
+
+| 🏢 Service | 💸 Free Tier Highlights | 🔗 Link |
+|-----------|-------------------------|---------|
+| 🦄 **[Supabase](https://supabase.com/)** – Open-source Firebase alternative with Postgres backend, perfect for real-time & n8n integration | 🆓 500 MB storage, 2 million requests/month, 24/7 uptime, generous free tier | 🔥 [Supabase Free](https://supabase.com/pricing) |
+| ☁️ **[ElephantSQL](https://www.elephantsql.com/)** – Simple managed PostgreSQL hosting with free shared plans | 🆓 20 MB storage, easy to connect, ideal for dev & small projects | 🐘 [ElephantSQL Plans](https://www.elephantsql.com/plans.html) |
+| ☁️ **[Heroku Postgres](https://www.heroku.com/postgres)** – Classic cloud PaaS with free tier database | 🆓 1,000 rows, 20 connections, 10k rows/day writes, sleeps after inactivity (may impact response time) | 🚀 [Heroku Postgres Free](https://www.heroku.com/pricing#postgres) |
+| ☁️ **[Neon](https://neon.tech/)** – Serverless Postgres with automatic scaling and free tier | 🆓 10 GB storage, 1 million monthly requests, modern cloud-native Postgres | ⚡️ [Neon Free Tier](https://neon.tech/pricing) |
+| 🐦 **[Aiven](https://aiven.io/postgresql)** – Fully managed PostgreSQL with free trial and credits | 🎁 30-day free trial with $30 credit, easy migration & high availability | 🎉 [Aiven Free Trial](https://aiven.io/pricing) |
+| ☁️ **[Citus Data on Azure](https://azure.microsoft.com/en-us/services/postgresql/)** – Horizontal scale-out Postgres, free for dev/test | 🆓 $200 Azure credit for 30 days + free tier options | 💎 [Azure PostgreSQL](https://azure.microsoft.com/en-us/pricing/details/postgresql/) |
+
+*State of affairs as for June 2025*
+
+---
+
+## 🐵 Development plans:
+
+- Kubernetes orchestration of containers with various customizable settings.
+- Increase of installation options of popular services n8n connects to on setup.
+- A script to dump workflows and creds from n8n regularly (via API or CLI). Re-import them with new keys and never lose your data.
+- Much more to come...
 
 ---
 
 © 2025 Paweł Kochanowicz · [GitHub](https://github.com/pkochanowicz)
 
 This project is licensed under the [MIT License](LICENSE).
-
-The containerized software is n8n - a simple and powerful node based automation tool  · [n8n-io/n8n](https://github.com/n8n-io/n8n)
