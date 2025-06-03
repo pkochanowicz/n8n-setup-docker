@@ -1,4 +1,5 @@
 <!-- README.md -->
+
 ```
 #   ▄▄        ▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄        ▄             ▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄    ▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄             ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄         ▄ ▄▄▄▄▄▄▄▄▄▄▄ 
 #  ▐░░▌      ▐░▐░░░░░░░░░░░▐░░▌      ▐░▌           ▐░░░░░░░░░░▌▐░░░░░░░░░░░▐░░░░░░░░░░░▐░▌  ▐░▐░░░░░░░░░░░▐░░░░░░░░░░░▌           ▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▐░▌       ▐░▐░░░░░░░░░░░▌
@@ -68,6 +69,7 @@ If you want a secure, local-AND-remote deployable `n8n` instance with PostgreSQL
 ---
 
 # 🚀 Quickstart
+
 ### 1️⃣ Initialize Docker Swarm (if needed)
 
 ```bash
@@ -82,7 +84,6 @@ docker swarm init
 Drop plain-text secret files into the ./secrets/ in the project dir. Example:
 
 ```bash
-
 echo "admin"    > secrets/N8N_BASIC_AUTH_USER.txt
 echo "hunter2"  > secrets/N8N_BASIC_AUTH_PASSWORD.txt
 echo "myKeyBase" > secrets/N8N_ENCRYPTION_KEY.txt
@@ -94,6 +95,7 @@ echo "n8n_user"       > secrets/DB_POSTGRESDB_USER.txt
 echo "pa$$w0rd"       > secrets/DB_POSTGRESDB_PASSWORD.txt
 echo "n8n"            > secrets/DB_POSTGRESDB_DATABASE.txt
 ```
+
 And the same for your DB creds.
 
 ---
@@ -103,14 +105,15 @@ And the same for your DB creds.
 ```bash
 ./docker_swarm_deploy.sh
 ```
+
 This will:
 
     🏗️ Build your my-n8n:latest image
-
+    
     🔐 Create (or update) all Docker secrets
-
+    
     📦 Deploy a Swarm stack (n8n_stack) with those secrets
-
+    
     🧠 Auto-detect your timezone and inject it too!
 
 ---
@@ -120,6 +123,7 @@ This will:
 ```bash
 docker service logs -f n8n_stack_n8n
 ```
+
 And that's it - n8n is set up and ready! In case of online deployment you'll be able to access your automations from anywhere!
 (login using the values from your secret files)
 
@@ -131,11 +135,11 @@ Your container launches via:
 `container_run.sh`:
 
     🧪 Loads secrets from /run/secrets/…
-
+    
     🔁 Converts them into environment variables
-
+    
     ✅ Tests PostgreSQL DB connection via psql
-
+    
     🎬 Runs n8n ONLY if everything is healthy
 
 💡 Fail fast, fail clean — or don’t fail at all.
@@ -153,11 +157,13 @@ To update:
 # Then:
 ./docker_swarm_deploy.sh
 ```
+
 This deletes+recreates them automatically.
 
 ---
 
 ### 💾 Helpful scripts
+
 (mostly helpful during development, not recommended for production):
 
 #### 💥 Getting rid of Docker Containers
@@ -167,6 +173,7 @@ Wanna burn it down?
 ```bash
 ./docker_destroy_container.sh
 ```
+
 (Watch out - the script stops and removes all the Docker containers!)
 
 ---
@@ -194,33 +201,64 @@ docker exec -it <container_name_or_id> n8n user-management:reset
 ---
 
 ### 📘 Docker Cheatsheet
+
 📎 Check out the [Docker_cheatsheet.md](./Docker_cheatsheet.md) for more handy commands!
 
 #### (I see you, automation fiend 😎)
 
 ---
 
+## 🚀 Why Choose `n8n-setup-docker`?
+
+`n8n-setup-docker` offers a streamlined and secure approach to deploying [n8n](https://n8n.io/) in a self-hosted environment. Here's why it stands out:
+
+- **Rapid Deployment**: Set up n8n in minutes using intuitive bash scripts, eliminating manual configuration hassles.
+
+- **Production-Ready Architecture**: Designed with best practices in mind, ensuring stability and scalability for production environments.
+
+- **Secure Secret Management**: Leverages Docker secrets and environment variables to handle sensitive information securely.
+
+- **Flexible Hosting Options**: Compatible with various environments, including local machines and cloud platforms like Google Cloud Shell.
+
+- **Comprehensive Documentation**: Provides clear instructions and a handy Docker command cheatsheet to assist users through the setup process.
+
+---
+
+## 🎯 Ideal Use Cases for `n8n-setup-docker`
+
+This setup is particularly beneficial for:
+
+- **Organizations Seeking Production-Grade Automation**: Deploy n8n in a stable and secure environment tailored for production workloads.
+
+- **Developers Requiring Customizable Workflows**: Tailor the setup to specific needs, including database configurations and deployment environments.
+
+- **Users Prioritizing Security**: Ensure sensitive data remains protected through robust secret management practices.
+
+- **Teams Operating in Diverse Environments**: Deploy seamlessly across local and cloud infrastructures, accommodating various deployment scenarios.
+
+---
+
 ## 💪 Powered By
 
-| 🧠 Platform| 🌐 Link |
-|------------|---------|
-| 🔧 **[n8n](https://n8n.io/)** – powerful workflow automation | 🧩 [Docs](https://docs.n8n.io/) |
-| 🐳 **[Docker](https://www.docker.com/)** – containerize all the things | 📦 [Hub](https://hub.docker.com/) |
+| 🧠 Platform                                                                          | 🌐 Link                                     |
+| ------------------------------------------------------------------------------------ | ------------------------------------------- |
+| 🔧 **[n8n](https://n8n.io/)** – powerful workflow automation                         | 🧩 [Docs](https://docs.n8n.io/)             |
+| 🐳 **[Docker](https://www.docker.com/)** – containerize all the things               | 📦 [Hub](https://hub.docker.com/)           |
 | 🐘 **[PostgreSQL](https://www.postgresql.org/)** – battle-tested relational database | 📚 [Docs](https://www.postgresql.org/docs/) |
-| 🤖 **[ChatGPT](https://chat.openai.com/)** – natural language assistant magic ✨ | 🔍 [OpenAI](https://openai.com/chatgpt) |
+| 🤖 **[ChatGPT](https://chat.openai.com/)** – natural language assistant magic ✨      | 🔍 [OpenAI](https://openai.com/chatgpt)     |
 
 ---
 
 ## 🚀 Free Tier PostgreSQL Hosting for n8n Self-Hosting (examples):
 
-| 🏢 Service | 💸 Free Tier Highlights | 🔗 Link |
-|-----------|-------------------------|---------|
-| 🦄 **[Supabase](https://supabase.com/)** – Open-source Firebase alternative with Postgres backend, perfect for real-time & n8n integration | 🆓 500 MB storage, 2 million requests/month, 24/7 uptime, generous free tier | 🔥 [Supabase Free](https://supabase.com/pricing) |
-| ☁️ **[ElephantSQL](https://www.elephantsql.com/)** – Simple managed PostgreSQL hosting with free shared plans | 🆓 20 MB storage, easy to connect, ideal for dev & small projects | 🐘 [ElephantSQL Plans](https://www.elephantsql.com/plans.html) |
-| ☁️ **[Heroku Postgres](https://www.heroku.com/postgres)** – Classic cloud PaaS with free tier database | 🆓 1,000 rows, 20 connections, 10k rows/day writes, sleeps after inactivity (may impact response time) | 🚀 [Heroku Postgres Free](https://www.heroku.com/pricing#postgres) |
-| ☁️ **[Neon](https://neon.tech/)** – Serverless Postgres with automatic scaling and free tier | 🆓 10 GB storage, 1 million monthly requests, modern cloud-native Postgres | ⚡️ [Neon Free Tier](https://neon.tech/pricing) |
-| 🐦 **[Aiven](https://aiven.io/postgresql)** – Fully managed PostgreSQL with free trial and credits | 🎁 30-day free trial with $30 credit, easy migration & high availability | 🎉 [Aiven Free Trial](https://aiven.io/pricing) |
-| ☁️ **[Citus Data on Azure](https://azure.microsoft.com/en-us/services/postgresql/)** – Horizontal scale-out Postgres, free for dev/test | 🆓 $200 Azure credit for 30 days + free tier options | 💎 [Azure PostgreSQL](https://azure.microsoft.com/en-us/pricing/details/postgresql/) |
+| 🏢 Service                                                                                                                                 | 💸 Free Tier Highlights                                                                                | 🔗 Link                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| 🦄 **[Supabase](https://supabase.com/)** – Open-source Firebase alternative with Postgres backend, perfect for real-time & n8n integration | 🆓 500 MB storage, 2 million requests/month, 24/7 uptime, generous free tier                           | 🔥 [Supabase Free](https://supabase.com/pricing)                                     |
+| ☁️ **[ElephantSQL](https://www.elephantsql.com/)** – Simple managed PostgreSQL hosting with free shared plans                              | 🆓 20 MB storage, easy to connect, ideal for dev & small projects                                      | 🐘 [ElephantSQL Plans](https://www.elephantsql.com/plans.html)                       |
+| ☁️ **[Heroku Postgres](https://www.heroku.com/postgres)** – Classic cloud PaaS with free tier database                                     | 🆓 1,000 rows, 20 connections, 10k rows/day writes, sleeps after inactivity (may impact response time) | 🚀 [Heroku Postgres Free](https://www.heroku.com/pricing#postgres)                   |
+| ☁️ **[Neon](https://neon.tech/)** – Serverless Postgres with automatic scaling and free tier                                               | 🆓 10 GB storage, 1 million monthly requests, modern cloud-native Postgres                             | ⚡️ [Neon Free Tier](https://neon.tech/pricing)                                       |
+| 🐦 **[Aiven](https://aiven.io/postgresql)** – Fully managed PostgreSQL with free trial and credits                                         | 🎁 30-day free trial with $30 credit, easy migration & high availability                               | 🎉 [Aiven Free Trial](https://aiven.io/pricing)                                      |
+| ☁️ **[Citus Data on Azure](https://azure.microsoft.com/en-us/services/postgresql/)** – Horizontal scale-out Postgres, free for dev/test    | 🆓 $200 Azure credit for 30 days + free tier options                                                   | 💎 [Azure PostgreSQL](https://azure.microsoft.com/en-us/pricing/details/postgresql/) |
 
 *State of affairs as for June 2025*
 
@@ -228,14 +266,14 @@ docker exec -it <container_name_or_id> n8n user-management:reset
 
 ## ☁️ Awesome Free (or Generous Trial) Shell Hosting for Remote Docker Swarm & n8n Frontend
 
-| 🏢 Service | 💸 Free Tier / Trial Highlights | 🔗 Link |
-|-----------|---------------------------------|---------|
-| 🚀 **[Google Cloud Shell](https://cloud.google.com/shell)** – Fully featured shell environment with 5 GB persistent storage | 🆓 Always free, built-in Docker support, easy to connect via browser, perfect for lightweight dev & Docker experiments | 🌐 [Google Cloud Shell](https://cloud.google.com/shell) |
-| 🐳 **[Railway](https://railway.app/)** – Developer-friendly cloud with free tier for containers and shell access | 🆓 $5 monthly credit (~500 hours), easy deployment, Docker support, persistent volumes | 🎉 [Railway Free Tier](https://railway.app/pricing) |
-| ☁️ **[Fly.io](https://fly.io/)** – Global app hosting with Docker container support, 3 shared CPUs | 🆓 3 shared CPUs, 256 MB RAM, 3 GB persistent volume, free 1600 CPU hours/month | ✈️ [Fly.io Free Tier](https://fly.io/docs/about/pricing/) |
-| 🐧 **[Oracle Cloud Free Tier](https://www.oracle.com/cloud/free/)** –  Always free compute instances with shell access | 🆓 2 AMD VMs with 1/8 OCPU each, 1 GB RAM, Docker installable, 100 GB block storage | 🐘 [Oracle Cloud Free Tier](https://www.oracle.com/cloud/free/) |
-| 🦄 **[AWS Free Tier (EC2)](https://aws.amazon.com/free/)** – Free micro instance for 12 months with full shell access | 🆓 750 hrs/month t2.micro/t3.micro, Docker installable, perfect for small dev projects | ☁️ [AWS Free Tier](https://aws.amazon.com/free/) |
-| 🐳 **[DigitalOcean App Platform](https://www.digitalocean.com/products/app-platform/)** – Easy Docker container deploy with free starter plan | 🆓 Starter tier with 3 static sites, 1 container, 100 GB bandwidth | 🚀 [DigitalOcean App Platform](https://www.digitalocean.com/pricing/) |
+| 🏢 Service                                                                                                                                    | 💸 Free Tier / Trial Highlights                                                                                        | 🔗 Link                                                               |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| 🚀 **[Google Cloud Shell](https://cloud.google.com/shell)** – Fully featured shell environment with 5 GB persistent storage                   | 🆓 Always free, built-in Docker support, easy to connect via browser, perfect for lightweight dev & Docker experiments | 🌐 [Google Cloud Shell](https://cloud.google.com/shell)               |
+| 🐳 **[Railway](https://railway.app/)** – Developer-friendly cloud with free tier for containers and shell access                              | 🆓 $5 monthly credit (~500 hours), easy deployment, Docker support, persistent volumes                                 | 🎉 [Railway Free Tier](https://railway.app/pricing)                   |
+| ☁️ **[Fly.io](https://fly.io/)** – Global app hosting with Docker container support, 3 shared CPUs                                            | 🆓 3 shared CPUs, 256 MB RAM, 3 GB persistent volume, free 1600 CPU hours/month                                        | ✈️ [Fly.io Free Tier](https://fly.io/docs/about/pricing/)             |
+| 🐧 **[Oracle Cloud Free Tier](https://www.oracle.com/cloud/free/)** –  Always free compute instances with shell access                        | 🆓 2 AMD VMs with 1/8 OCPU each, 1 GB RAM, Docker installable, 100 GB block storage                                    | 🐘 [Oracle Cloud Free Tier](https://www.oracle.com/cloud/free/)       |
+| 🦄 **[AWS Free Tier (EC2)](https://aws.amazon.com/free/)** – Free micro instance for 12 months with full shell access                         | 🆓 750 hrs/month t2.micro/t3.micro, Docker installable, perfect for small dev projects                                 | ☁️ [AWS Free Tier](https://aws.amazon.com/free/)                      |
+| 🐳 **[DigitalOcean App Platform](https://www.digitalocean.com/products/app-platform/)** – Easy Docker container deploy with free starter plan | 🆓 Starter tier with 3 static sites, 1 container, 100 GB bandwidth                                                     | 🚀 [DigitalOcean App Platform](https://www.digitalocean.com/pricing/) |
 
 *State of affairs as for June 2025*
 
