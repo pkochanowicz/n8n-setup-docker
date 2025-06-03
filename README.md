@@ -71,6 +71,7 @@ If you want a secure, local-AND-remote deployable `n8n` instance with PostgreSQL
 ### 1️⃣ Initialize Docker Swarm (if needed)
 
 ```bash
+# only needed on the first run:
 docker swarm init
 ```
 
@@ -100,10 +101,6 @@ And the same for your DB creds.
 ### 3️⃣ Deploy It Like a Boss
 
 ```bash
-# only on the first run:
-docker swarm init
-
-# and then, to deploy:
 ./docker_swarm_deploy.sh
 ```
 This will:
@@ -224,6 +221,21 @@ docker exec -it <container_name_or_id> n8n user-management:reset
 | ☁️ **[Neon](https://neon.tech/)** – Serverless Postgres with automatic scaling and free tier | 🆓 10 GB storage, 1 million monthly requests, modern cloud-native Postgres | ⚡️ [Neon Free Tier](https://neon.tech/pricing) |
 | 🐦 **[Aiven](https://aiven.io/postgresql)** – Fully managed PostgreSQL with free trial and credits | 🎁 30-day free trial with $30 credit, easy migration & high availability | 🎉 [Aiven Free Trial](https://aiven.io/pricing) |
 | ☁️ **[Citus Data on Azure](https://azure.microsoft.com/en-us/services/postgresql/)** – Horizontal scale-out Postgres, free for dev/test | 🆓 $200 Azure credit for 30 days + free tier options | 💎 [Azure PostgreSQL](https://azure.microsoft.com/en-us/pricing/details/postgresql/) |
+
+*State of affairs as for June 2025*
+
+---
+
+## ☁️ Awesome Free (or Generous Trial) Shell Hosting for Remote Docker Swarm & n8n Frontend
+
+| 🏢 Service | 💸 Free Tier / Trial Highlights | 🔗 Link |
+|-----------|---------------------------------|---------|
+| 🚀 **[Google Cloud Shell](https://cloud.google.com/shell)** – Fully featured shell environment with 5 GB persistent storage | 🆓 Always free, built-in Docker support, easy to connect via browser, perfect for lightweight dev & Docker experiments | 🌐 [Google Cloud Shell](https://cloud.google.com/shell) |
+| 🐳 **[Railway](https://railway.app/)** – Developer-friendly cloud with free tier for containers and shell access | 🆓 $5 monthly credit (~500 hours), easy deployment, Docker support, persistent volumes | 🎉 [Railway Free Tier](https://railway.app/pricing) |
+| ☁️ **[Fly.io](https://fly.io/)** – Global app hosting with Docker container support, 3 shared CPUs | 🆓 3 shared CPUs, 256 MB RAM, 3 GB persistent volume, free 1600 CPU hours/month | ✈️ [Fly.io Free Tier](https://fly.io/docs/about/pricing/) |
+| 🐧 **[Oracle Cloud Free Tier](https://www.oracle.com/cloud/free/)** –  Always free compute instances with shell access | 🆓 2 AMD VMs with 1/8 OCPU each, 1 GB RAM, Docker installable, 100 GB block storage | 🐘 [Oracle Cloud Free Tier](https://www.oracle.com/cloud/free/) |
+| 🦄 **[AWS Free Tier (EC2)](https://aws.amazon.com/free/)** – Free micro instance for 12 months with full shell access | 🆓 750 hrs/month t2.micro/t3.micro, Docker installable, perfect for small dev projects | ☁️ [AWS Free Tier](https://aws.amazon.com/free/) |
+| 🐳 **[DigitalOcean App Platform](https://www.digitalocean.com/products/app-platform/)** – Easy Docker container deploy with free starter plan | 🆓 Starter tier with 3 static sites, 1 container, 100 GB bandwidth | 🚀 [DigitalOcean App Platform](https://www.digitalocean.com/pricing/) |
 
 *State of affairs as for June 2025*
 

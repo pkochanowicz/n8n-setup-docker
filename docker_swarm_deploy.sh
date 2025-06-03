@@ -20,6 +20,13 @@ else
   echo "✅ Swarm already initialized."
 fi
 
+echo "🔐 [0/4] Fixing permissions on secrets..."
+chmod 700 ./secrets && chmod 600 ./secrets/*.txt && chown "$USER:$USER" ./secrets/*.txt || {
+  echo "❌ Failed to fix permissions on secrets/"
+  exit 1
+}
+echo "✅ Secrets folder is locked & loaded!"
+
 echo "🔐 [1/4] Loading Docker secrets from '${SECRETS_DIR}'..."
 
 if [[ ! -d "$SECRETS_DIR" ]]; then
